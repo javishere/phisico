@@ -19,7 +19,11 @@ exports.getAllPatientsHandler =  (event) => {
         statusCode: 200
     };
 
-    MongoClient.connect(url, function(err, client) {
+    MongoClient.connect(url,{
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        }, 
+        function(err, client) {
 
         console.log("in")
 
