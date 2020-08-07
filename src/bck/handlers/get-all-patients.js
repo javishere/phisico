@@ -10,7 +10,7 @@ const client = new MongoClient(url);
 
 // Connect using MongoClient
 exports.getAllPatientsHandler = async (event) => {
-    //try {
+    try {
         await client.connect();
     
         const database = client.db("clinica");
@@ -38,8 +38,8 @@ exports.getAllPatientsHandler = async (event) => {
         };
         console.log("Response" + JSON.stringify(response))
         return response
-    //} finally {
-    //    await client.close();
-    //}
+    } finally {
+        await client.close();
+    }
     
 }
