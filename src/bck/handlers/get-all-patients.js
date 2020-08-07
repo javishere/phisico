@@ -4,49 +4,41 @@ const test = require('assert');
 
 // Connection url
 
-const url = "mongodb+srv://Javier:physiolivia@cluster0.crtxs.mongodb.net/clinica?retryWrites=true&w=majority";
-
+const url = "mongodb+srv://Javier:physiolivia@cluster0.crtxs.mongodb.net?retryWrites=true&w=majority";
+const client = new MongoClient(url);
 // Database Name
 
-const dbName = 'clinica';
 // Connect using MongoClient
-exports.getAllPatientsHandler =  (event) => {
-    var code
-    var response = {
-        headers: {
-            "Content-Type": "application/json"
-        },
-        statusCode: 200
-    };
-
-    MongoClient.connect(url,{
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-        }, 
-        function(err, client) {
-
-        console.log("in")
-
-        // Use the admin database for the operation
+exports.getAllPatientsHandler = async (event) => {
+    try {
+        await client.connect();
+    
+        const database = client.db("clinica");
+        const collection = database.collection("pacientes");
+    
         
-        const adminDb = client.db(dbName);
-        const pacientesCollection = adminDb.collection("pacientes")
-        
+    
+        const cursor = collection.find();
+    
+        // print a message if no documents were found
+        if ((await cursor.count()) === 0) {
+            console.log("No documents found!");
+        }
 
-        // Get all pacientes in collection
-
-        pacientesCollection.find({}).toArray((err, result)=>{
-            var res = result;
-            if (err) {
-                code = 400
-                res= err
-            };
-            console.log(result);
-            
-            response["body"]=JSON.stringify(res);
-        });
-        
-    });
-    return response;
-    console.log("out")
+        var body=[]
+        for await (const doc of cursor) {
+            body.push(doc);
+        }
+        var response = {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            statusCode: 200,
+            body: JSON.stringify(body)
+        };
+        return response
+    } finally {
+        await client.close();
+    }
+    
 }
