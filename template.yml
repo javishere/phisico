@@ -36,7 +36,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: __tests__/examples/handlers/get-all-items.js.getAllItemsHandler
+      Handler: __tests__/examples/handlers/get-all-items.getAllItemsHandler
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
@@ -124,7 +124,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /clinica/getAllPatients
+            Path: /clinica
             Method: GET
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
