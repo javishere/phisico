@@ -2,7 +2,7 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
 
 // Import all functions from get-by-id.js
-const lambda = require('../../../src/handlers/get-by-id.js');
+const lambda = require('../../../__tests__/examples/handlers/get-by-id.js');
 
 // This includes all tests for getByIdHandler
 describe('Test getByIdHandler', () => {

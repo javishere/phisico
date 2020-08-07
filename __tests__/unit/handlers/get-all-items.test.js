@@ -2,7 +2,7 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
 
 // Import all functions from get-all-items.js
-const lambda = require('../../../src/handlers/get-all-items.js');
+const lambda = require('../../../__tests__/examples/handlers/put-item.js');
 
 // This includes all tests for getAllItemsHandler
 describe('Test getAllItemsHandler', () => {
