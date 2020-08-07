@@ -115,7 +115,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: src/bck/handler/get-all-patients.getAllPatientsHandler
+      Handler: src/bck/handlers/get-all-patients.getAllPatientsHandler
       Runtime: nodejs12.x
       MemorySize: 128
       Timeout: 60

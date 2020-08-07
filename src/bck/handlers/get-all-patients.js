@@ -18,7 +18,7 @@ exports.getAllPatientsHandler = (event) => {
 
         // Use the admin database for the operation
         
-        const adminDb = client.db(dbName).admin();
+        const adminDb = client.db(dbName);
         const pacientesCollection = adminDb.collection("pacientes")
 
         // Get all pacientes in collection
