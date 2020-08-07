@@ -119,7 +119,7 @@ Resources:
       Runtime: nodejs12.x
       MemorySize: 128
       Timeout: 60
-      Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
+      Description: Get http all patients in DB clinica
       Events:
         Api:
           Type: Api
