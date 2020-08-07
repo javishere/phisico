@@ -111,21 +111,7 @@ Resources:
             Method: POST
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
-  getAllPatientsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      Handler: src/bck/handlers/get-all-patients.getAllPatientsHandler
-      Runtime: nodejs12.x
-      MemorySize: 128
-      Timeout: 60
-      Description: Get http all patients in DB clinica
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /clinica
-            Method: GET
+
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
     Type: AWS::Serverless::SimpleTable
