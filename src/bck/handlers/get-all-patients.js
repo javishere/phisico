@@ -16,7 +16,7 @@ exports.getAllPatientsHandler = async (event) => {
         const database = client.db("clinica");
         const collection = database.collection("pacientes");
     
-        
+        console.log("Conected to MongoDB")
     
         const cursor = collection.find();
     
@@ -36,6 +36,7 @@ exports.getAllPatientsHandler = async (event) => {
             statusCode: 200,
             body: JSON.stringify(body)
         };
+        console.log("Response" + response)
         return response
     } finally {
         await client.close();
