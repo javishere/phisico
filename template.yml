@@ -127,6 +127,23 @@ Resources:
           Properties:
             Path: /clinica
             Method: GET
+
+  updatePatientByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/bck/handlers/update-patient-by-id.updatePatientById
+      Runtime: nodejs12.x
+      MemorySize: 128
+      Timeout: 60
+      Description: Edit http all patients in DB clinica
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /clinica
+            Method: POST
+  
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
     Type: AWS::Serverless::SimpleTable

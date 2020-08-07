@@ -1,10 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
+const config = require('config');
 
 const test = require('assert');
 
 // Connection url
 
-const url = "mongodb+srv://Javier:physiolivia@cluster0.crtxs.mongodb.net?retryWrites=true&w=majority";
+const url = config.get('bck.dbConnectionURL');
 const client = new MongoClient(url);
 // Database Name
 
