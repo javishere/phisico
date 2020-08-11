@@ -23,9 +23,9 @@ json_schema:
 */
 
 function UpdatePatientModel(json) {
-    PatientModel.call(this, json)
-
     this.JSONDoc = JSON.parse(json)
+    PatientModel.call(this, this.JSONDoc)
+    
 
     if (!this.JSONDoc.hasOwnProperty('fieldsToChange')) throw error("fieldToChange is missing");
     if (!this.JSONDoc.hasOwnProperty('newValues')) throw error("fieldToChange is missing");
