@@ -125,7 +125,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /clinica
+            Path: /clinica/getAllPatients
             Method: GET
 
   updatePatientByIdFunction:
@@ -141,7 +141,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /clinica
+            Path: /clinica/updatePatientById
             Method: POST
   
   getPatientByIdFunction:
@@ -157,8 +157,8 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /clinica/getPatientById
-            Method: POST
+            Path: /clinica/getPatientById/{idDocument}
+            Method: GET
   
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:

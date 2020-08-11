@@ -9,7 +9,7 @@ const test = require('assert');
 // Connection url
 
 const url = config.get('bck.dbConnectionURL');
-const client = new MongoClient(url, { useUnifiedTopology: true });
+
 // Database Name
 
 // Connect using MongoClient
@@ -54,7 +54,7 @@ exports.getAllPatientsHandler = async (event) => {
 
 exports.getPatientByIdHandler = async (event) => {
     const client = new MongoClient(url, { useUnifiedTopology: true });
-    var PatientData = new PatientModel(event.body);
+    var patientData = new PatientModel(event.pathParameters);
 
     await client.connect();
 
@@ -64,7 +64,7 @@ exports.getPatientByIdHandler = async (event) => {
     console.log("Conected to MongoDB")
 
     var query = {
-        _id: mongodb.ObjectId(PatientData.idDocument)
+        _id: patientData.idDocument
     }
 
     var cursor = await collection.findOne(query).then(client.close());

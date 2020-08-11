@@ -4,15 +4,12 @@ const MongoClient = mongodb.MongoClient;
 var UpdatePatientModel = require('../../models/UpdatePatientModel')
 
 const url = config.get('bck.dbConnectionURL');
-const client = new MongoClient(url);
+
 
 exports.updatePatientByIdHandler = async (event, context)=>{
+    const client = new MongoClient(url,{ useUnifiedTopology: true });
     var updatePatientData = new UpdatePatientModel(event.body) 
-    
-    const id =updatePatientData.idDocument;
-    const fieldsToChange = updatePatientData.fieldsToChange;
-    const newValues = updatePatientData.newValues;
-
+   
     await client.connect();
     
     const database = client.db("clinica");
@@ -20,15 +17,15 @@ exports.updatePatientByIdHandler = async (event, context)=>{
 
     console.log("Conected to MongoDB")
 
-    const filter = { _id: mongodb.ObjectId(id) };
+    const filter = { _id: updatePatientData.idDocument};
         
     const updateDocument = {
         $set: {
         },
     };
 
-    await fieldsToChange.forEach((field, index) => {
-        updateDocument.$set[field.toString()]=newValues[index]
+    await updatePatientData.fieldsToChange.forEach((field, index) => {
+        updateDocument.$set[field.toString()]=updatePatientData.newValues[index]
     });
 
     var response = {
@@ -38,7 +35,7 @@ exports.updatePatientByIdHandler = async (event, context)=>{
     };
 
 
-    const result = await collection.updateOne(filter, updateDocument).then(
+    await collection.updateOne(filter, updateDocument).then(
         res => {
             console.log(`Updated ${res.result.n} documents`)
             response.statusCode= 200
@@ -49,7 +46,7 @@ exports.updatePatientByIdHandler = async (event, context)=>{
             response.statusCode= 500
             response.body= JSON.stringify(err.error)
         },
-    );
+    ).then(client.close());
 
     return response
 
