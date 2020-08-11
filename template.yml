@@ -157,7 +157,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /clinica/getPatientsById
+            Path: /clinica/getPatientById
             Method: POST
   
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
