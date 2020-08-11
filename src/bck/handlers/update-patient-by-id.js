@@ -1,21 +1,17 @@
 const config = require('config');
-const mongodb = require('mongodb')
+const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
+var UpdatePatientModel = require('../../models/UpdatePatientModel')
 
 const url = config.get('bck.dbConnectionURL');
 const client = new MongoClient(url);
 
 exports.updatePatientById = async (event, context)=>{
-    const data = JSON.parse(event.body); 
+    var updatePatientData = new UpdatePatientModel(event.body) 
     
-    if (!data.hasOwnProperty('idDocument')) return console.error("idDocument is missing");
-    if (!data.hasOwnProperty('fieldToChange')) return console.error("fieldToChange is missing");
-    if (!data.hasOwnProperty('newValues')) return console.error("fieldToChange is missing");
-    if (!(data.fieldToChange.length == data.newValues.length)) return console.error("fieldToChange and newValues no same lenght");
-    
-    const id =data.idDocument;
-    const fieldsToChange = data.fieldToChange;
-    const newValues = data.newValues;
+    const id =updatePatientData.idDocument;
+    const fieldsToChange = updatePatientData.fieldsToChange;
+    const newValues = updatePatientData.newValues;
 
     await client.connect();
     
