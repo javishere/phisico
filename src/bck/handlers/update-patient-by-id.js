@@ -6,7 +6,7 @@ var UpdatePatientModel = require('../../models/UpdatePatientModel')
 const url = config.get('bck.dbConnectionURL');
 const client = new MongoClient(url);
 
-exports.updatePatientById = async (event, context)=>{
+exports.updatePatientByIdHandler = async (event, context)=>{
     var updatePatientData = new UpdatePatientModel(event.body) 
     
     const id =updatePatientData.idDocument;
@@ -21,7 +21,7 @@ exports.updatePatientById = async (event, context)=>{
     console.log("Conected to MongoDB")
 
     const filter = { _id: mongodb.ObjectId(id) };
-        // update the value of the 'z' field to 42
+        
     const updateDocument = {
         $set: {
         },
