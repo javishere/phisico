@@ -17,7 +17,7 @@ const client = new MongoClient(url, { useUnifiedTopology: true });
 
 // Connect using MongoClient
 exports.getAllPatientsHandler = async (event) => {
-
+    const client = new MongoClient(url, { useUnifiedTopology: true });
     await client.connect();
 
     const database = client.db("clinica");
@@ -37,7 +37,7 @@ exports.getAllPatientsHandler = async (event) => {
         body.push(doc);
     }
 
-    await client.close()
+    await client.close();
 
     var response = {
         headers: {
@@ -53,6 +53,7 @@ exports.getAllPatientsHandler = async (event) => {
 }
 
 exports.getPatientByIdHandler = async (event) => {
+    const client = new MongoClient(url, { useUnifiedTopology: true });
     var PatientData = new PatientModel(event.body);
 
     await client.connect();
