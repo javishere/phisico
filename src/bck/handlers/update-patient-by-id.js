@@ -8,7 +8,7 @@ const url = config.get('bck.dbConnectionURL');
 
 exports.updatePatientByIdHandler = async (event, context)=>{
     const client = new MongoClient(url,{ useUnifiedTopology: true });
-    var updatePatientData = new UpdatePatientModel(event.body) 
+    var updatePatientData = new UpdatePatientModel(JSON.parse(event.body)) 
    
     await client.connect();
     

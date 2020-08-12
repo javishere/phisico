@@ -10,8 +10,12 @@ function UpdatePatientModel() {
 function UpdatePatientModel(idDocument, fieldsToChange, newValues) {
     PatientModel.call(this,idDocument)
 
-    this.fieldsToChange = fieldsToChange instanceof Array ? fieldsToChange : [fieldsToChange]
-    this.newValues = newValues instanceof Array ? newValues : [newValues]
+    try{
+        this.fieldsToChange = fieldsToChange instanceof Array ? fieldsToChange : [fieldsToChange]
+        this.newValues = newValues instanceof Array ? newValues : [newValues]
+    }catch(error){
+        console.error(error)
+    }
 }
 /*
 json_schema:
@@ -22,17 +26,17 @@ json_schema:
 }
 */
 
-function UpdatePatientModel(json) {
-    this.JSONDoc = JSON.parse(json)
-    PatientModel.call(this, this.JSONDoc)
-    
+function UpdatePatientModel(doc) {
+    this.doc = doc
+    PatientModel.call(this, this.doc)    
 
-    if (!this.JSONDoc.hasOwnProperty('fieldsToChange')) throw error("fieldToChange is missing");
-    if (!this.JSONDoc.hasOwnProperty('newValues')) throw error("fieldToChange is missing");
-    if (!(this.JSONDoc.fieldsToChange.length == this.JSONDoc.newValues.length)) throw error("fieldToChange and newValues no same lenght");
-
-    this.fieldsToChange = this.JSONDoc.fieldsToChange instanceof Array ? this.JSONDoc.fieldsToChange : [this.JSONDoc.fieldsToChange]
-    this.newValues = this.JSONDoc.newValues instanceof Array ? this.JSONDoc.newValues : [this.JSONDoc.newValues]
+    if (!(this.doc.fieldsToChange.length == this.doc.newValues.length)) throw error("fieldToChange and newValues no same lenght");
+    try{
+        this.fieldsToChange = this.doc.fieldsToChange instanceof Array ? this.doc.fieldsToChange : [this.doc.fieldsToChange]
+        this.newValues = this.doc.newValues instanceof Array ? this.doc.newValues : [this.doc.newValues]
+    }catch(error){
+        console.error(error)
+    }
 }
 
 module.exports = UpdatePatientModel

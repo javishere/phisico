@@ -69,7 +69,7 @@ exports.getPatientByIdHandler = async (event) => {
 
     var cursor = await collection.findOne(query).then(client.close());
 
-    var body = cursor ? cursor : { data: "empty" }
+    var body = cursor || { data: "empty" }
 
     var response = {
         headers: {

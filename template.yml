@@ -159,6 +159,22 @@ Resources:
           Properties:
             Path: /clinica/getPatientById/{idDocument}
             Method: GET
+
+  addPatientFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: src/bck/handlers/add-patients.addPatientHandler
+      Runtime: nodejs12.x
+      MemorySize: 128
+      Timeout: 60
+      Description: Add patient function
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /clinica/addPatient
+            Method: POST
   
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
