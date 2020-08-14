@@ -1,5 +1,15 @@
 {
-    "bck":{
-        "dbConnectionURL":"mongodb+srv://Javier:physiolivia@cluster0.crtxs.mongodb.net?retryWrites=true&w=majority"
+    "clusterConfig":{
+        "url":"mongodb+srv://Javier:physiolivia@cluster0.crtxs.mongodb.net?retryWrites=true&w=majority"
+    },
+    "dbSchema":{    
+        "clinicDB":{
+            "name": "clinica",
+            "collections":{
+                "patients":{
+                    "name":"pacientes"
+                }
+            }
+        }
     }
 }

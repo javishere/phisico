@@ -3,18 +3,18 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 var UpdatePatientModel = require('../../models/UpdatePatientModel')
 
-const url = config.get('bck.dbConnectionURL');
+// Connection params
 
+const url = config.get('clusterConfig.url');
+const dbName = config.get("dbSchema.clinicDB.name")
+const collectionName = config.get("dbSchema.clinicDB.collections.patients.name")
 
-exports.updatePatientByIdHandler = async (event, context)=>{
-    const client = new MongoClient(url,{ useUnifiedTopology: true });
-    var updatePatientData = new UpdatePatientModel(JSON.parse(event.body)) 
-   
-    await client.connect();
-    
-    const database = client.db("clinica");
-    const collection = database.collection("pacientes");
+exports.updatePatientByIdHandler = async (event, context)=>{    
+    var updatePatientData = new UpdatePatientModel(JSON.parse(event.body))
 
+    const client = new MongoClient(url,{ useUnifiedTopology: true });   
+    await client.connect();    
+    const collection = client.db(dbName).collection(collectionName);
     console.log("Conected to MongoDB")
 
     const filter = { _id: updatePatientData.idDocument};

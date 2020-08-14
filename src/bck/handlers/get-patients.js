@@ -1,27 +1,18 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const config = require('config');
-
 var PatientModel = require('../../models/PatientModel')
 
-const test = require('assert');
+// Connection params
 
-// Connection url
+const url = config.get('clusterConfig.url');
+const dbName = config.get("dbSchema.clinicDB.name")
+const collectionName = config.get("dbSchema.clinicDB.collections.patients.name")
 
-const url = config.get('bck.dbConnectionURL');
-
-// Database Name
-
-// Connect using MongoClient
-// Database Name
-
-// Connect using MongoClient
 exports.getAllPatientsHandler = async (event) => {
     const client = new MongoClient(url, { useUnifiedTopology: true });
-    await client.connect();
-
-    const database = client.db("clinica");
-    const collection = database.collection("pacientes");
+    await client.connect();    
+    const collection = client.db(dbName).collection(collectionName);
 
     console.log("Conected to MongoDB")
 
@@ -53,13 +44,10 @@ exports.getAllPatientsHandler = async (event) => {
 }
 
 exports.getPatientByIdHandler = async (event) => {
-    const client = new MongoClient(url, { useUnifiedTopology: true });
     var patientData = new PatientModel(event.pathParameters);
-
-    await client.connect();
-
-    const database = client.db("clinica");
-    const collection = database.collection("pacientes");
+    const client = new MongoClient(url, { useUnifiedTopology: true });
+    await client.connect();  
+    const collection = client.db(dbName).collection(collectionName);
 
     console.log("Conected to MongoDB")
 

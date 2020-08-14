@@ -7,9 +7,10 @@ const AddPatientModel = require('../../models/AddPatienModel');
 
 // Connection params
 
-const url = config.get('bck.dbConnectionURL');
-const dbName = "clinica"
-const collectionName = "pacientes"
+const url = config.get('clusterConfig.url');
+const dbName = config.get("dbSchema.clinicDB.name")
+const collectionName = config.get("dbSchema.clinicDB.collections.patients.name")
+
 
 exports.addPatientHandler = async (event) => {
     const client = new MongoClient(url, { useUnifiedTopology: true });  
