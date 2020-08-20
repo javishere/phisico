@@ -148,8 +148,9 @@ Resources:
           Properties:
             Path: /clinica/updatePatientById
             Method: POST
-      Variables:
-        CLUSTER_URL: !Ref ClusterUrl
+      Environment:
+        Variables:
+          CLUSTER_URL: !Ref ClusterUrl
 
   getPatientByIdFunction:
     Type: AWS::Serverless::Function
