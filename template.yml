@@ -167,6 +167,9 @@ Resources:
           Properties:
             Path: /clinica/getPatientById/{idDocument}
             Method: GET
+      Environment:
+        Variables:
+          CLUSTER_URL: !Ref ClusterUrl
 
   addPatientFunction:
     Type: AWS::Serverless::Function
@@ -183,6 +186,9 @@ Resources:
           Properties:
             Path: /clinica/addPatient
             Method: POST
+      Environment:
+        Variables:
+          CLUSTER_URL: !Ref ClusterUrl
   
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
