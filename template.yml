@@ -26,7 +26,7 @@ Parameters:
     Type: String
   ClusterUrl:
     Type: String
-    Default: "mongodb+srv://Javier:physiolivia@cluster0.egklh.mongodb.net?retryWrites=true&w=majority"
+    Default: mongodb+srv://Javier:physiolivia@cluster0.egklh.mongodb.net?retryWrites=true&w=majority
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
@@ -148,7 +148,9 @@ Resources:
           Properties:
             Path: /clinica/updatePatientById
             Method: POST
-  
+      Variables:
+        CLUSTER_URL: !Ref ClusterUrl
+
   getPatientByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
