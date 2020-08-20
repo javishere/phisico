@@ -131,7 +131,7 @@ Resources:
             Method: GET
       Environment:
         Variables:
-          CLUSTER_URL: Default
+          CLUSTER_URL: !Ref ClusterUrl
 
   updatePatientByIdFunction:
     Type: AWS::Serverless::Function
