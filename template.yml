@@ -24,7 +24,6 @@ Globals:
 Parameters:
   AppId:
     Type: String
-
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
@@ -99,7 +98,7 @@ Resources:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
-      Environment:
+      Environment:  
         Variables:
           # Make table name accessible as environment variable from function code during execution
           SAMPLE_TABLE: !Ref SampleTable
@@ -127,6 +126,9 @@ Resources:
           Properties:
             Path: /clinica/getAllPatients
             Method: GET
+      Environment:
+        Variables:
+          CLUSTER_URL: Default
 
   updatePatientByIdFunction:
     Type: AWS::Serverless::Function

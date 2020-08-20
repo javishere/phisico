@@ -5,7 +5,7 @@ var PatientModel = require('../../models/PatientModel')
 
 // Connection params
 
-const url = config.get('clusterConfig.url');
+const url = process.env.CLUSTER_URL;
 const dbName = config.get("dbSchema.clinicDB.name")
 const collectionName = config.get("dbSchema.clinicDB.collections.patients.name")
 
