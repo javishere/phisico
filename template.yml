@@ -179,7 +179,7 @@ Resources:
       Runtime: nodejs12.x
       MemorySize: 128
       Timeout: 60
-      Description: Add patient function
+      Description: Add patient in DB clinica
       Events:
         Api:
           Type: Api
