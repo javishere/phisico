@@ -2,6 +2,7 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const config = require('config');
 var PatientModel = require('../../models/PatientModel')
+const HeaderModel = require('../../models/HeaderModel')
 
 // Connection params
 
@@ -31,10 +32,7 @@ exports.getAllPatientsHandler = async (event) => {
     await client.close();
 
     var response = {
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        },
+        headers: JSON.stringify(new HeaderModel("allow-all")),
         statusCode: 200,
         body: JSON.stringify(body)
     };
@@ -61,9 +59,7 @@ exports.getPatientByIdHandler = async (event) => {
     var body = cursor || { data: "empty" }
 
     var response = {
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers:JSON.stringify(new HeaderModel("allow-all")),
         statusCode: 200,
         body: JSON.stringify(body)
     };
