@@ -33,7 +33,7 @@ function PatientModel(doc) {
         this.complementaries= doc.complementaries 
         this.treatments = doc.treatments 
     }catch(error){
-        consolee.error(error)
+        console.error(error)
     }
 }
 
