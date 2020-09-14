@@ -48,12 +48,7 @@ Resources:
       CodeUri: ./
       Handler: src/bck/handlers/proxy.handler
       Runtime: nodejs10.x
-      Events:
-        ProxyApiRoot:
-          Type: Api
-          Properties:
-            Path: /
-            Method: ANY
+      Events:        
         ProxyApiGreedy:
           Type: Api
           Properties:
