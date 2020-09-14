@@ -34,7 +34,7 @@ Resources:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
   ApiGatewayApi:
-    Type: AWS::Serverless::Api
+    Type: AWS::Serverless::RestApi
     Properties:
       StageName: Stage
       Cors:
