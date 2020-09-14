@@ -21,12 +21,12 @@ Globals:
     # More information in https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary'
     
-      
   Api:
     Cors:
       AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
       AllowHeaders: "'*'"
       AllowOrigin: "'*'"
+
 Parameters:
   AppId:
     Type: String
@@ -92,16 +92,7 @@ Resources:
           Properties:
             Path: /{id}
             Method: GET            
-        ProxyApiRoot:
-          Type: Api
-          Properties:
-            Path: /
-            Method: ANY
-        ProxyApiGreedy:
-          Type: Api
-          Properties:
-            Path: /{proxy+}
-            Method: ANY
+        
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
