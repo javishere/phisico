@@ -41,7 +41,24 @@ Resources:
 
   
   # This is a Lambda function config associated with the source code: get-all-items.js
-  
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Replace <bucket> with your bucket name
+      CodeUri: ./
+      Handler: src/bck/handlers/proxy.handler
+      Runtime: nodejs6.10
+      Events:
+        ProxyApiRoot:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+        ProxyApiGreedy:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
   getAllItemsFunction:
     Type: AWS::Serverless::Function
     Properties:
