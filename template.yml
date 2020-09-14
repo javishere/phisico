@@ -20,7 +20,9 @@ Globals:
     # it has to be manually updated when you add resources to your application.
     # More information in https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary'
-    
+    Environment:
+      Variables:
+        CLUSTER_URL: !Ref ClusterUrl
   Api:
     Cors:
       AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
@@ -41,101 +43,7 @@ Resources:
 
   
   # This is a Lambda function config associated with the source code: get-all-items.js
-  LambdaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      # Replace <bucket> with your bucket name
-      CodeUri: ./
-      Handler: src/bck/handlers/proxy.handler
-      Runtime: nodejs10.x
-      Events:        
-        ProxyApiGreedy:
-          Type: Api
-          Properties:
-            Path: /{proxy+}
-            Method: ANY
-
-  getAllItemsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      Handler: __tests__/examples/handlers/get-all-items.getAllItemsHandler
-      Runtime: nodejs10.x
-      MemorySize: 128
-      Timeout: 60
-      Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
-      Policies:
-        # Give Create/Read/Update/Delete Permissions to the SampleTable
-        - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
-      Environment:
-        Variables:
-          # Make table name accessible as environment variable from function code during execution
-          SAMPLE_TABLE: !Ref SampleTable
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /
-            Method: GET
-  # Each Lambda function is defined by properties:
-  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-
-  # This is a Lambda function config associated with the source code: get-by-id.js
-  # getByIdFunction:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     CodeUri: ./
-  #     Handler: __tests__/examples/handlers/get-by-id.getByIdHandler
-  #     Runtime: nodejs10.x
-  #     MemorySize: 128
-  #     Timeout: 60
-  #     Description: A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
-  #     Policies:
-  #       # Give Create/Read/Update/Delete Permissions to the SampleTable
-  #       - DynamoDBCrudPolicy:
-  #           TableName: !Ref SampleTable
-  #     Environment:
-  #       Variables:
-  #         # Make table name accessible as environment variable from function code during execution
-  #         SAMPLE_TABLE: !Ref SampleTable
-  #     Events:
-  #       Api:
-  #         Type: Api
-  #         Properties:
-  #           Path: /{id}
-  #           Method: GET            
-        
-  # Each Lambda function is defined by properties:
-  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-
-  # This is a Lambda function config associated with the source code: put-item.js
-  putItemFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      Handler: __tests__/examples/handlers/put-item.putItemHandler
-      Runtime: nodejs10.x
-      MemorySize: 128
-      Timeout: 60
-      Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
-      Policies:
-        # Give Create/Read/Update/Delete Permissions to the SampleTable
-        - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
-      Environment:  
-        Variables:
-          # Make table name accessible as environment variable from function code during execution
-          SAMPLE_TABLE: !Ref SampleTable
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /
-            Method: POST
-  # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
-  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
-  
+ 
   getAllPatientsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -151,9 +59,7 @@ Resources:
           Properties:
             Path: /clinica/getAllPatients
             Method: GET
-      Environment:
-        Variables:
-          CLUSTER_URL: !Ref ClusterUrl
+      
 
   updatePatientByIdFunction:
     Type: AWS::Serverless::Function
@@ -189,9 +95,7 @@ Resources:
           Properties:
             Path: /clinica/getPatientById/{idDocument}
             Method: GET
-      Environment:
-        Variables:
-          CLUSTER_URL: !Ref ClusterUrl
+      
 
   addPatientFunction:
     Type: AWS::Serverless::Function
@@ -208,10 +112,7 @@ Resources:
           Properties:
             Path: /clinica/addPatient
             Method: POST
-      Environment:
-        Variables:
-          CLUSTER_URL: !Ref ClusterUrl
-  
+      
 
   getAllPatientsViewFunction:
     Type: AWS::Serverless::Function
