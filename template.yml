@@ -47,7 +47,7 @@ Resources:
       # Replace <bucket> with your bucket name
       CodeUri: ./
       Handler: src/bck/handlers/proxy.handler
-      Runtime: nodejs10.X
+      Runtime: nodejs10.x
       Events:
         ProxyApiRoot:
           Type: Api
