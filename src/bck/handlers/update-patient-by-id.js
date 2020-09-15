@@ -29,7 +29,7 @@ exports.updatePatientByIdHandler = async (event, context)=>{
     });
 
     var response = {
-        headers: JSON.stringify(new HeaderModel("allow-all"))
+        headers: new HeaderModel("allow-all")
     };
 
 

@@ -18,7 +18,7 @@ exports.addPatientHandler = async (event) => {
     
     var patientData = new AddPatientModel(JSON.parse(event.body));
     var response = {
-        headers: JSON.stringify(new HeaderModel("allow-all"))
+        headers: new HeaderModel("allow-all")
     }
     await client.connect().then(
                                 cli => {

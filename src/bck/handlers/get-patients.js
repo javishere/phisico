@@ -32,7 +32,7 @@ exports.getAllPatientsHandler = async (event) => {
     await client.close();
 
     var response = {
-        headers: JSON.stringify(new HeaderModel("allow-all")),
+        headers: new HeaderModel("allow-all"),
         statusCode: 200,
         body: JSON.stringify(body)
     };
@@ -59,7 +59,7 @@ exports.getPatientByIdHandler = async (event) => {
     var body = cursor || { data: "empty" }
 
     var response = {
-        headers:JSON.stringify(new HeaderModel("allow-all")),
+        headers: new HeaderModel("allow-all"),
         statusCode: 200,
         body: JSON.stringify(body)
     };
