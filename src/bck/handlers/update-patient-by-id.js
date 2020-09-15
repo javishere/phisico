@@ -2,6 +2,8 @@ const config = require('config');
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 var UpdatePatientModel = require('../../models/UpdatePatientModel')
+const HeaderModel = require('../../models/HeaderModel')
+
 
 // Connection params
 

@@ -4,6 +4,8 @@ const config = require('config');
 
 const test = require('assert');
 const AddPatientModel = require('../../models/AddPatienModel');
+const HeaderModel = require('../../models/HeaderModel')
+
 
 // Connection params
 
