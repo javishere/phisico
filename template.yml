@@ -28,6 +28,11 @@ Globals:
       AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
       AllowHeaders: "'*'"
       AllowOrigin: "'*'"
+    Auth:
+      Authorizers:
+        PhysiosAuth:
+          UserPoolArn: "arn:aws:cognito-idp:eu-west-1:562666120389:userpool/eu-west-1_8FIYqRDvq"
+
 
 Parameters:
   AppId:
@@ -59,6 +64,8 @@ Resources:
           Properties:
             Path: /clinica/getAllPatients
             Method: GET
+            Auth:
+              Authorizer: PhysiosAuth
       
 
   updatePatientByIdFunction:
