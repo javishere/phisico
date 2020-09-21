@@ -121,6 +121,8 @@ Resources:
           Properties:
             Path: /clinica/addPatient
             Method: POST
+            Auth:
+              Authorizer: PhysiosAuth
       
 
   getAllPatientsViewFunction:
