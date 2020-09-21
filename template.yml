@@ -83,6 +83,8 @@ Resources:
           Properties:
             Path: /clinica/updatePatientById
             Method: POST
+            Auth:
+              Authorizer: PhysiosAuth
       Environment:
         Variables:
           CLUSTER_URL: !Ref ClusterUrl
