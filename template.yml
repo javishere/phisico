@@ -83,8 +83,6 @@ Resources:
           Properties:
             Path: /clinica/updatePatientById
             Method: POST
-            Auth:
-              Authorizer: PhysiosAuth
       Environment:
         Variables:
           CLUSTER_URL: !Ref ClusterUrl
@@ -104,8 +102,6 @@ Resources:
           Properties:
             Path: /clinica/getPatientById/{idDocument}
             Method: GET
-            Auth:
-              Authorizer: PhysiosAuth
       
 
   addPatientFunction:
@@ -123,8 +119,6 @@ Resources:
           Properties:
             Path: /clinica/addPatient
             Method: POST
-            Auth:
-              Authorizer: PhysiosAuth
       
 
   getAllPatientsViewFunction:
@@ -142,8 +136,6 @@ Resources:
           Properties:
             Path: /patientsView
             Method: GET
-            Auth:
-              Authorizer: PhysiosAuth
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
     Type: AWS::Serverless::SimpleTable
