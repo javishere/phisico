@@ -127,28 +127,4 @@ Resources:
               Authorizer: PhysiosAuth
       
 
-  getAllPatientsViewFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      Handler: src/front/handlers/get-all-patients-view.getAllPatientsView
-      Runtime: nodejs12.x
-      MemorySize: 128
-      Timeout: 60
-      Description: Get All Patient View
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /patientsView
-            Method: GET
-  # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
-  SampleTable:
-    Type: AWS::Serverless::SimpleTable
-    Properties:
-      PrimaryKey:
-        Name: id
-        Type: String
-      ProvisionedThroughput:
-        ReadCapacityUnits: 2
-        WriteCapacityUnits: 2
+  
