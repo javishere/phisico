@@ -39,7 +39,7 @@ Parameters:
     Type: String
   ClusterUrl:
     Type: String
-    Default: mongodb+srv://Javier:physiolivia@cluster0.crtxs.mongodb.net?retryWrites=true&w=majority
+    Default: mongodb+srv://Javier:<password>@cluster0.crtxs.mongodb.net/clinica?retryWrites=true&w=majority
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
